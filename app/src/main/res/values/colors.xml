@@ -7,4 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="redBackground">#E6D1D9</color>
+    <color name="redButtons">#DADA838D</color>
+    <color name="redScreen">#F86C6C</color>
+    <color name="blueBackground">#B9D3F3</color>
+    <color name="blueButtons">#DADA838D</color>
+    <color name="blueScreen">#DA83DAD2</color>
+    <color name="orangeBackground">#F8B8A4</color>
+    <color name="orangeButtons">#FF5722</color>
+    <color name="orangeScreen">#FD8059</color>
 </resources>

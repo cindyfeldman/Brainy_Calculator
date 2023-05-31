@@ -15,14 +15,23 @@
             android:id="@+id/action_FirstFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
     </fragment>
+
+
     <fragment
         android:id="@+id/SecondFragment"
+        android:name="com.example.calculator.ColorThemeSelectPageFragment"
+        android:label="@string/Welcome_Text"
+        tools:layout="@layout/color_theme_page_fragment">
+
+        <action
+            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            app:destination="@id/ThirdFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ThirdFragment"
         android:name="com.example.calculator.CalculatorPageFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/calculator_page_fragment">
-
-        <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
     </fragment>
 </navigation>

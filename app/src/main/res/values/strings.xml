@@ -3,6 +3,8 @@
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="Welcome_Text">Welcome to Brainy Calculator</string>
+
+    <string name="BackgroundSelect">Please Select a Color Theme</string>
     <string name="second_fragment_label">Brainy Calculator</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
