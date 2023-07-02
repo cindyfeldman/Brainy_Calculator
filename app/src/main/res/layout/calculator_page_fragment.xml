@@ -299,7 +299,6 @@
         android:layout_height="140dp"
         android:layout_marginTop="4dp"
         android:background="#DA83DAD2"
-        android:text="  "
         android:textSize="50dp"
         app:layout_constraintBottom_toTopOf="@+id/number8Button"
         app:layout_constraintEnd_toEndOf="parent"

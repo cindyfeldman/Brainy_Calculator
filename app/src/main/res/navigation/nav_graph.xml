@@ -24,8 +24,15 @@
         tools:layout="@layout/color_theme_page_fragment">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            android:id="@+id/action_SecFragment_to_thirdFragment"
             app:destination="@id/ThirdFragment" />
+        <argument
+            android:name="backgroundColor"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="buttonColor"
+            app:argType="reference" />
     </fragment>
 
     <fragment
