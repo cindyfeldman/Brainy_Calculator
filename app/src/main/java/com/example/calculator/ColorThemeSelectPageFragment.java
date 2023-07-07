@@ -1,58 +1,35 @@
 package com.example.calculator;
 
 import android.annotation.SuppressLint;
-import android.content.ClipData;
-import android.content.Context;
-import android.content.Intent;
-import android.database.DataSetObserver;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavDirections;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.bumptech.glide.Glide;
 import com.example.calculator.databinding.ColorThemePageFragmentBinding;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.slider.Slider;
-import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 import com.smarteist.autoimageslider.SliderViewAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ColorThemeSelectPageFragment extends Fragment {
     ConstraintLayout layout;
     private View rootView;
     private ColorThemePageFragmentBinding binding;
     private SliderView sliderView;
-private SliderAdapterExample adapter;
 private TextView resultDisplayTextView;
 private MaterialButton[] buttons;
 private ImageView imageView;
@@ -60,6 +37,7 @@ private ImageButton doneButton;
 private Fragment CalculatorPage;
     Color buttonColor;
     Color textViewColor;
+    private SliderAdapter sliderAdapter;
     private static final String ARG_BACKGROUND_COLOR = "Color.Blue";
 
     @Override
@@ -76,7 +54,11 @@ private Fragment CalculatorPage;
         super.onViewCreated(view, savedInstanceState);
         sliderView = view.findViewById(R.id.slider);
 
-        adapter = new SliderAdapterExample(this);
+        sliderAdapter = new SliderAdapter();
+
+        sliderView.setSliderAdapter(sliderAdapter);
+        sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
+
         doneButton = view.findViewById(R.id.doneButton);
         resultDisplayTextView  = view.findViewById(R.id.resultDisplayTextView);
         layout = view.findViewById( R.id.background);
@@ -101,7 +83,7 @@ private Fragment CalculatorPage;
         buttons[17] = view.findViewById(R.id.plusButton);
         buttons[18] = view.findViewById(R.id.equalButton);
         imageView = view.findViewById(R.id.colorImageView);
-        setRedColors();
+       setOrangeColors();
         view.setOnTouchListener(new OnSwipeTouchListener(ColorThemeSelectPageFragment.this.getContext()) {
 
             @SuppressLint("ResourceAsColor")
@@ -110,17 +92,18 @@ private Fragment CalculatorPage;
             @Override
             public void onSwipeLeft() {
                 super.onSwipeLeft();
+                sliderView.slideToNextPosition();
 
                 currentIndex++;
                 // your swipe left here.
                 System.out.println("Swiped left");
                 if(currentIndex == 0){
-                    setRedColors();
+                    setOrangeColors();
                     System.out.println("red colors");
 
                 }
                 else if(currentIndex == 1){
-                    setOrangeColors();
+                    setRedColors();
                     System.out.println("orange colors");
 
                 }
@@ -135,27 +118,27 @@ private Fragment CalculatorPage;
             public void onSwipeRight() {
                 super.onSwipeRight();
                 // your swipe right here.
-                System.out.println("Swiped right");currentIndex++;
+                System.out.println("Swiped right");
                 // your swipe left here.
-
+                sliderView.slideToNextPosition();
                 currentIndex--;
                 if(currentIndex == 2){
                     setBlueColors();
                     System.out.println("blue colors");
                 }
                 else if(currentIndex == 1){
-                    setOrangeColors();
+                    setRedColors();
                     System.out.println("orange colors");
                 }
                 else if(currentIndex  ==0){
-                    setRedColors();
+                    setOrangeColors();
                     System.out.println("red colors");
                 }
                 else if(currentIndex < 0){
                     currentIndex = 2;
                     System.out.println("reset colors");
                 }
-                currentIndex--;
+
 
             }
         });
@@ -196,7 +179,7 @@ private Fragment CalculatorPage;
     }
 
     public void setBlueColors(){
-        imageView.setImageResource(R.drawable.blue_screen);
+        //imageView.setImageResource(R.drawable.blue_screen);
         layout.setBackgroundColor(Color.rgb(185,211,243));
         sliderView.setIndicatorSelectedColor(Color.rgb(49, 102, 255));
         sliderView.setIndicatorUnselectedColor( Color.rgb(255, 255, 255));
@@ -205,7 +188,7 @@ private Fragment CalculatorPage;
     }
 
     public void setRedColors(){
-        imageView.setImageResource(R.drawable.red_screen);
+       // imageView.setImageResource(R.drawable.red_screen);
         layout.setBackgroundColor(Color.rgb(230,209,217));
         sliderView.setIndicatorSelectedColor(Color.rgb(255, 0, 76));
         sliderView.setIndicatorUnselectedColor(Color.rgb(255, 255, 255));
@@ -216,7 +199,7 @@ private Fragment CalculatorPage;
 
 
     public void setOrangeColors(){
-        imageView.setImageResource(R.drawable.orange_screen);
+        //imageView.setImageResource(R.drawable.orange_screen);
         layout.setBackgroundColor(Color.rgb(248, 184, 164));
         sliderView.setIndicatorSelectedColor(Color.rgb(255, 113, 31));
         sliderView.setIndicatorUnselectedColor(Color.rgb(255, 255, 255));
@@ -225,19 +208,5 @@ private Fragment CalculatorPage;
 
     }
 
-}
 
-class SliderAdapterVH extends SliderViewAdapter.ViewHolder {
-
-    View itemView;
-    ImageView imageViewBackground;
-    ImageView imageGifContainer;
-    TextView textViewDescription;
-
-    public SliderAdapterVH(View itemView) {
-        super(itemView);
-        imageViewBackground = itemView.findViewById(R.id.slider);
-        imageGifContainer = itemView.findViewById(R.id.background);
-        this.itemView = itemView;
-    }
 }

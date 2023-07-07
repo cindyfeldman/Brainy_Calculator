@@ -15,6 +15,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.calculator.databinding.ActivityMainBinding;
+import com.smarteist.autoimageslider.SliderView;
 
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,6 +32,8 @@ public class MainActivity extends AppCompatActivity  {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+
 
     }
 

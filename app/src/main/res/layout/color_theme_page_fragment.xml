@@ -21,6 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="672dp"
             tools:src="@drawable/blue_screen" />
+
     </LinearLayout>
 
     <ImageButton
@@ -37,6 +38,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/color_select_textview"
+        android:layout_width="371dp"
+        android:layout_height="99dp"
+        android:layout_marginTop="24dp"
+        android:text="Select a Background Color"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <RelativeLayout
         android:layout_width="475dp"
@@ -63,13 +76,11 @@
 
     <com.smarteist.autoimageslider.SliderView
         android:id="@+id/slider"
-        android:layout_width="413dp"
-        android:layout_height="43dp"
+        android:layout_width="523dp"
+        android:layout_height="36dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.0"
         app:sliderAnimationDuration="600"
         app:sliderAutoCycleDirection="back_and_forth"
         app:sliderIndicatorAnimationDuration="600"
